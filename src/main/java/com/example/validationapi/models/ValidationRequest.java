@@ -9,7 +9,7 @@ public class ValidationRequest {
     private StudentInfo studentInfo;
     private String dependencyStatus;
     private String maritalStatus;
-    private String spouseSSN;
+    private SpouseInfo spouseInfo;
     private String stateOfResidence;
     private HouseholdStatus household;
     private IncomeModel income;

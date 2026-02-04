@@ -18,7 +18,7 @@ public class StateOfResidenceValidation extends BaseValidation {
         String raw = request.getStateOfResidence();
 
         if (raw == null || raw.trim().isEmpty()) {
-            throw new IllegalArgumentException("State of residence errors: stateOfResidence is required (e.g., OH, CA, NY).");
+            throw new IllegalArgumentException("State of residence errors: stateOfResidence is required");
         }
 
         String normalized = raw.trim().toUpperCase();

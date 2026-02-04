@@ -1,8 +1,10 @@
 package com.example.validationapi.rules;
 
-import com.example.validationapi.models.MaritalType;
-import com.example.validationapi.models.ValidationRequest;
 import org.springframework.stereotype.Component;
+import com.example.validationapi.models.MaritalType;
+import com.example.validationapi.models.SpouseInfo;
+
+import com.example.validationapi.models.ValidationRequest;
 
 @Component
 public class MarriageValidation extends BaseValidation {
@@ -32,10 +34,22 @@ public class MarriageValidation extends BaseValidation {
         }
 
         if (type == MaritalType.married) {
-            String spouseSsn = request.getSpouseSSN();
+            SpouseInfo spouseInfo = request.getSpouseInfo();
+            
+            if(spouseInfo == null) {
+                throw new IllegalArgumentException("Marriage errors: married selected but spouseInfo is missing.");
+            }
+
+            String spouseSsn = spouseInfo.getSpouseSSN();
+            String spouseName = spouseInfo.getFirstName() + " " + spouseInfo.getLastName();
+
+            
 
             if (spouseSsn == null || spouseSsn.trim().isEmpty()) {
                 throw new IllegalArgumentException("Marriage errors: married selected but spouseSSN is missing.");
+            }
+            if(spouseName == null || spouseName.trim().isEmpty()) {
+                throw new IllegalArgumentException("Marriage errors: married selected but spouseName is missing.");
             }
 
             if (!spouseSsn.matches("\\d{9}")) {

@@ -8,7 +8,9 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class StudentInfoValidation extends BaseValidation {
 
@@ -80,5 +82,11 @@ public class StudentInfoValidation extends BaseValidation {
 
     private boolean isNullOrEmpty(String str) {
         return str == null || str.trim().isEmpty();
+    }
+
+    @Override
+    public void severityHandler() {
+        log.info("[INFO] Severity handler invoked for StudentInfoValidation.");
+        log.info("[INFO] Suspicious activity logged for further review.");
     }
 }
